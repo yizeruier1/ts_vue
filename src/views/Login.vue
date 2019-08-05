@@ -24,7 +24,7 @@
 
 <script lang="ts">
     import { Vue, Component, Provide } from 'vue-property-decorator'
-
+    import { login } from '../api/api'
     @Component
     export default class Login extends Vue {
         // 登录中
@@ -47,15 +47,14 @@
             (this.$refs["ruleForm"] as any).validate((valid: boolean): void => {
                 if(valid){
                     this.Logining = true
-
-                    this.$http.post('/login', this.ruleForm).then((res: any) => {
+                    login(this.ruleForm).then((res: any) => {
                         this.Logining = false
-                        if(res.data.code === 200){
+                        if(res.code === 200){
                             this.$message.success('登录成功！')
                             localStorage.setItem('user', this.ruleForm.username)
                             this.$router.push('/home')
                         }else{
-                            this.$message.error(res.data.msg)
+                            this.$message.error(res.msg)
                         }
                     })
                 }

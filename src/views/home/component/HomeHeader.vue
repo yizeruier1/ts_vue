@@ -14,7 +14,7 @@
                     </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="1">个人中心</el-dropdown-item>
-                        <el-dropdown-item command="2">退出登录</el-dropdown-item>
+                        <el-dropdown-item command="2" divided>退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </el-col>
@@ -52,4 +52,8 @@
 </script>
 <style lang="stylus" scoped>
     @import '../home.styl'
+
+    .el-dropdown-link
+        cursor pointer
+        color #fff
 </style>

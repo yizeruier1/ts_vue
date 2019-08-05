@@ -6,48 +6,20 @@
             <HomeHeader />
 
             <el-container>
-                <el-aside width="260px">
-                    <el-menu
-                        default-active="1"
-                        class="el-menu-vertical-demo"
-                        background-color="#545c64"
-                        text-color="#fff"
-                        active-text-color="#ffd04b">
-                        <el-submenu index="1">
-                            <template slot="title">
-                                <i class="el-icon-star-off"></i>
-                                <span>Welcome</span>
-                            </template>
-                            <el-menu-item-group>
-                                <el-menu-item index="1-1">选项1</el-menu-item>
-                                <el-menu-item index="1-2">选项2</el-menu-item>
-                            </el-menu-item-group>
-                        </el-submenu>
-                        <el-menu-item index="2">
-                            <i class="el-icon-menu"></i>
-                            <span slot="title">导航二</span>
-                        </el-menu-item>
-                        <el-menu-item index="3">
-                            <i class="el-icon-document"></i>
-                            <span slot="title">导航三</span>
-                        </el-menu-item>
-                        <el-menu-item index="4">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
-                    </el-menu>
-                </el-aside>
+                <!-- // 左边导航菜单 -->
+                <LeftNav></LeftNav>
 
+                <!-- // 路径 导航 -->
                 <el-main>
                     <el-breadcrumb separator-class="el-icon-arrow-right">
-                        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-                        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-                        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-                        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+                        <el-breadcrumb-item :to="{ path: item.path }" v-for="item in breadcrumbArr" :key="item.name">{{ item.meta.title }}</el-breadcrumb-item>
                     </el-breadcrumb>
+
+                    <div style="margin-top:20px;">
+                        <router-view />
+                    </div>
                 </el-main>
             </el-container>
-
 
             <el-footer>learn and learn</el-footer>
         </el-container>
@@ -56,16 +28,22 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component, Provide } from 'vue-property-decorator'
+    import { Vue, Component, Provide, Watch } from 'vue-property-decorator'
     import HomeHeader from './component/HomeHeader.vue'
+    import LeftNav from './component/LeftNav.vue'
     @Component({
         components: {
-            HomeHeader
+            HomeHeader,
+            LeftNav
         }
     })
     export default class Home extends Vue {
+        @Provide() breadcrumbArr: any = []
 
-        
+        @Watch('$route', { immediate: true, deep: true })
+        routeChange(route: any): void{
+            this.breadcrumbArr = route.matched
+        }
     }
 </script>
 
