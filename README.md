@@ -1,29 +1,11 @@
 # ts_vue
 
-## Project setup
+## 用到的工具
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
+    vue-cli3、yarn、vue-property-decorator 和 vuex-class 装饰器、element-ui、axios 加 mockjs、vue全家桶
 ```
 
-### Compiles and minifies for production
+## 做的功能
 ```
-yarn run build
+    数据列表table、常用图表echarts、路由权限校验、  and so on
 ```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
